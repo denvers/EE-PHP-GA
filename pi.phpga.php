@@ -27,7 +27,7 @@ $plugin_info = array(
     'pi_author' => 'Denver Sessink',
     'pi_author_url' => 'https://github.com/denvers/EE-PHP-GA',
     'pi_description' => ADDON_DESCRIPTION,
-    'pi_usage' => '{exp:phpga:trackPageview ga_account_id="" domainname="domain.com"}',
+    'pi_usage' => '{exp:phpga:trackPageview ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" pagetitle="{title}"}',
 );
 
 /**
@@ -134,7 +134,7 @@ class Phpga
         ob_start();
         ?>
     *** EXAMPLE ***
-    {exp:phpga:trackPageview ga_account_id="" domainname="domain.com"}
+    {exp:phpga:trackPageview ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" pagetitle="{title}"}
 
     <?php
         $buffer = ob_get_contents();
