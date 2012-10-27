@@ -1,74 +1,109 @@
 # Server-Side Google Analytics PHP Client
 
-## Watch-out: This is just a proof-of-concept. Don't use in a production environment!
-
 
 This addon enables you to implement Google Analytics in your ExpressionEngine site, the cookie-less way. Really nice if you're fighting with the recent EU rules about cookies.
 
-***Currently only supports the `trackPageview` method of Google Analytics.***
 
-## Changelog
-~ 04-oct-2012 ~ 
+## Google Analytics methods
+### Actual support
 
-0.1 alpha release (proof of concept)
+1. Basic Methods `trackPageView`
+2. Campaigns
+3. Custom Variables `setCustomVar`
+4. Ecommerce
+5. Event Tracking
+6. Multiple Domain
+7. Social Interactions
+8. User Timings
 
-## Usage
+### Basic Methods
+
+*[https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiBasicConfiguration](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiBasicConfiguration)*
+
+##### trackPageView
+
 `{exp:phpga:trackPageview ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" pagetitle="{title}"}`
 
-## TODO
 
-**Basic Methods**
+### Campaigns
 
-* https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiBasicConfiguration
-* Done: `_trackPageview` `_setAccount`
+*[https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiCampaignTracking](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiCampaignTracking)*
+*[https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCampaigns](https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCampaigns)*
 
-**Campaigns**
+##### setCampaignTrack 
+*To be implemented*
 
-* https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiCampaignTracking
-* https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCampaigns
-* Todo: `_setCampaignTrack` 
+### Custom Variables
 
-**Custom Variables**
+*[https://developers.google.com/analytics/devguides/collection/gajs/](https://developers.google.com/analytics/devguides/collection/gajs/)*
 
-* https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCustomVariables
-* Done: `_setCustomVar`
-* Deprecated: `_setVar`
+##### setCustomVar
+`{exp:phpga:setCustomVar ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" index="" name="" value=""}`
+`{exp:phpga:setCustomVar ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" index="" name="" value="" scope=""}`
 
-**Ecommerce**
+##### ~~setVar~~ *Deprecated*
 
-* https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce
-* https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingEcommerce
-* Done: 
-* Todo: `_addTrans` `_addItem` `_trackTrans`	
+### Ecommerce
 
-**Event tracking**
+[https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce)
+[https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingEcommerce](https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingEcommerce)
 
-* https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEventTracking
-* https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide
-* Done: 
-* Todo: `_trackEvent`
+##### addTrans
+*To be implemented*
+##### addItem
+*To be implemented*
+##### trackTrans
+*To be implemented*
 
-**Multiple domain**
+### Event tracking
 
-* https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiDomainDirectory
-* https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSite
-* Done:
-* Todo: `_setAllowLinker` `_setDomainName` `_link` *and others*
+[https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEventTracking](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEventTracking)
+[https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide](https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide)
 
-**Social Interactions**
+##### trackEvent
+*To be implemented*
 
-* https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiSocialTracking
-* https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSocial
-* Done: 
-* Todo: `_trackSocial`
+### Multiple domain
 
-**User timings**
+[https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiDomainDirectory](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiDomainDirectory)
+[https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSite](https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSite)
 
-* https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiUserTiming
-* https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingTiming
-* Done: 
-* Todo: `_trackTiming`
+##### setAllowLinker
+*To be implemented*
+##### setDomainName
+*To be implemented*
+##### link
+*To be implemented*
+
+***and others***
+
+### Social Interactions
+
+[https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiSocialTracking](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiSocialTracking)
+[https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSocial](https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSocial)
+
+##### trackSocial
+*To be implemented*
+
+### User timings
+
+[https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiUserTiming](https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiUserTiming)
+[https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingTiming](https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingTiming)
+
+##### trackTiming
+*To be implemented*
+
+## Changelog
+*27-oct-2012* - v1.0
+
+* trackPageview support
+* addCustomVar support
+
+
+*04-oct-2012* - v0.1
+
+* proof of concept
 
 ## Credits
 
-* Uses the **Server-Side Google Analytics PHP Client** by United Prototype. See: http://code.google.com/p/php-ga/
+Uses the **Server-Side Google Analytics PHP Client** by United Prototype. See: http://code.google.com/p/php-ga/
