@@ -51,26 +51,55 @@ class Phpga
     }
 
     /**
-     * trackPageview with Google Analytics
+     * Checks PHP version (needs 5.3+)
      *
-     * @return string
+     * @return bool|string
      */
-    public function trackPageview()
+    private function _runCompatibilityCheck()
     {
-        // Check PHP version (needs 5.3+)
         if (!$this->_compatiblePhpVersion()) {
             // Show message in HTML comment
             $this->return_data = "<!-- EE-PHP-GA really needs PHP version 5.3+. You are running " . $this->_getCurrentPhpVersion() . " -->";
             return $this->return_data;
         }
 
+        return true;
+    }
+
+    /**
+     * @param $account_id
+     * @param $domainname
+     * @return UnitedPrototype\GoogleAnalytics\Tracker
+     */
+    private function _initTracker($account_id, $domainname)
+    {
+        return new GoogleAnalytics\Tracker($account_id, $domainname);
+    }
+
+    /**
+     * trackPageview with Google Analytics
+     *
+     * @return string
+     */
+    public function trackPageview()
+    {
+        $this->_runCompatibilityCheck();
+
         try {
-            $ga_account_id = $this->EE->TMPL->fetch_param('ga_account_id');
-            $domainname = $this->EE->TMPL->fetch_param('domainname');
-            $pagetitle = $this->EE->TMPL->fetch_param('pagetitle');
 
             // Initilize GA Tracker
-            $tracker = new GoogleAnalytics\Tracker($ga_account_id, $domainname);
+            $tracker = $this->_initTracker(
+                $this->EE->TMPL->fetch_param('ga_account_id'),
+                $this->EE->TMPL->fetch_param('domainname')
+            );
+
+            // Assemble Page information
+            $page = new GoogleAnalytics\Page($this->EE->uri->uri_string());
+            $page->setTitle($this->EE->TMPL->fetch_param('pagetitle'));
+
+            // Assemble Session information
+            // (could also get unserialized from PHP session)
+            $session = new GoogleAnalytics\Session();
 
             // Assemble Visitor information
             // (could also get unserialized from database)
@@ -79,15 +108,7 @@ class Phpga
             $visitor->setUserAgent($_SERVER['HTTP_USER_AGENT']);
             $visitor->setScreenResolution('1024x768'); // TODO
 
-            // Assemble Session information
-            // (could also get unserialized from PHP session)
-            $session = new GoogleAnalytics\Session();
-
-            // Assemble Page information
-            $page = new GoogleAnalytics\Page($this->EE->uri->uri_string());
-            $page->setTitle($pagetitle);
-
-            // Track page view
+            // Track pageview
             $tracker->trackPageview($page, $session, $visitor);
         } catch (Exception $ex) {
             $this->return_data = "<!-- EE-PHP-GA exception: " . $ex->getMessage() . " -->";
