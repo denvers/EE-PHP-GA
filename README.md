@@ -66,7 +66,3 @@ This addon enables you to implement Google Analytics in your ExpressionEngine si
 ## Credits
 
 * Uses the **Server-Side Google Analytics PHP Client** by United Prototype. See: http://code.google.com/p/php-ga/
-
-* Idea by @ivyone ~ http://twitter.com/ivyone
-
-* ExpressionEngine plugin by @webvakker ~ http://twitter.com/webvakker
