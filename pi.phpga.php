@@ -51,7 +51,10 @@ class Phpga
     }
 
     /**
-     * trackPageview with Google Analytics
+     * Google Analytics: trackPageview
+     *
+     * Usage:
+     * {exp:phpga:trackPageview ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" pagetitle="{title}"}
      *
      * @return string
      */
@@ -60,12 +63,8 @@ class Phpga
         $this->_runCompatibilityCheck();
 
         try {
-
             // Initilize GA Tracker
-            $tracker = $this->_initTracker(
-                $this->EE->TMPL->fetch_param('ga_account_id'),
-                $this->EE->TMPL->fetch_param('domainname')
-            );
+            $tracker = $this->_initTracker();
 
             // Assemble Page information
             $page = new GoogleAnalytics\Page($this->EE->uri->uri_string());
@@ -92,6 +91,32 @@ class Phpga
         $this->return_data = "<!-- EE-PHP-GA: page tracking OK! -->";
         return $this->return_data;
     }
+
+    /**
+     * Google Analytics: setCustomVar
+     *
+     * Usage:
+     * {exp:phpga:setCustomVar ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" index="" name="" value=""}
+     * {exp:phpga:setCustomVar ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" index="" name="" value="" scope=""}
+     *
+     * @return void
+     */
+    public function setCustomVar()
+    {
+        $this->_runCompatibilityCheck();
+
+        $tracker = $this->_initTracker();
+
+        $index = $this->EE->TMPL->fetch_param('index'); // required
+        $name = $this->EE->TMPL->fetch_param('name'); // required
+        $value = $this->EE->TMPL->fetch_param('value'); // required
+        $scope = ( $this->EE->TMPL->fetch_param('scope') != "" ) ? $this->EE->TMPL->fetch_param('scope') : null; // optional
+
+        $tracker->addCustomVariable(
+            new \UnitedPrototype\GoogleAnalytics\CustomVariable($index, $name, $value, $scope)
+        );
+    }
+
     /**
      * Checks PHP version (needs 5.3+)
      *
@@ -109,12 +134,15 @@ class Phpga
     }
 
     /**
-     * @param $account_id
-     * @param $domainname
+     * Expects template param ga_account_id and domainname
+     *
      * @return UnitedPrototype\GoogleAnalytics\Tracker
      */
-    private function _initTracker($account_id, $domainname)
+    private function _initTracker()
     {
+        $account_id = $this->EE->TMPL->fetch_param('ga_account_id');
+        $domainname = $this->EE->TMPL->fetch_param('domainname');
+
         return new GoogleAnalytics\Tracker($account_id, $domainname);
     }
 

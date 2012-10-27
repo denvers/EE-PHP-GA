@@ -20,48 +20,54 @@ This addon enables you to implement Google Analytics in your ExpressionEngine si
 **Basic Methods**
 
 * https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiBasicConfiguration
-* `_setAccount` `_setCustomVar` `_setVar` `_trackPageview` *and others*
+* Done: `_trackPageview` `_setAccount`
 
 **Campaigns**
 
 * https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiCampaignTracking
 * https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCampaigns
-* `_setCampaignTrack` 
+* Todo: `_setCampaignTrack` 
 
 **Custom Variables**
 
 * https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingCustomVariables
-* `_setCustomVar`
+* Done: `_setCustomVar`
+* Deprecated: `_setVar`
 
 **Ecommerce**
 
 * https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce
 * https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingEcommerce
-* `_addTrans` `_addItem` `_trackTrans`	
+* Done: 
+* Todo: `_addTrans` `_addItem` `_trackTrans`	
 
 **Event tracking**
 
 * https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEventTracking
 * https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide
-* `_trackEvent`
+* Done: 
+* Todo: `_trackEvent`
 
 **Multiple domain**
 
 * https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiDomainDirectory
 * https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSite
-* `_setAllowLinker` `_setDomainName` `_link` *and others*
+* Done:
+* Todo: `_setAllowLinker` `_setDomainName` `_link` *and others*
 
 **Social Interactions**
 
 * https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiSocialTracking
 * https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSocial
-* `_trackSocial`
+* Done: 
+* Todo: `_trackSocial`
 
 **User timings**
 
 * https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiUserTiming
 * https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingTiming
-* `_trackTiming`
+* Done: 
+* Todo: `_trackTiming`
 
 ## Credits
 
