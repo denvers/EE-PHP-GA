@@ -51,32 +51,6 @@ class Phpga
     }
 
     /**
-     * Checks PHP version (needs 5.3+)
-     *
-     * @return bool|string
-     */
-    private function _runCompatibilityCheck()
-    {
-        if (!$this->_compatiblePhpVersion()) {
-            // Show message in HTML comment
-            $this->return_data = "<!-- EE-PHP-GA really needs PHP version 5.3+. You are running " . $this->_getCurrentPhpVersion() . " -->";
-            return $this->return_data;
-        }
-
-        return true;
-    }
-
-    /**
-     * @param $account_id
-     * @param $domainname
-     * @return UnitedPrototype\GoogleAnalytics\Tracker
-     */
-    private function _initTracker($account_id, $domainname)
-    {
-        return new GoogleAnalytics\Tracker($account_id, $domainname);
-    }
-
-    /**
      * trackPageview with Google Analytics
      *
      * @return string
@@ -117,6 +91,31 @@ class Phpga
 
         $this->return_data = "<!-- EE-PHP-GA: page tracking OK! -->";
         return $this->return_data;
+    }
+    /**
+     * Checks PHP version (needs 5.3+)
+     *
+     * @return bool|string
+     */
+    private function _runCompatibilityCheck()
+    {
+        if (!$this->_compatiblePhpVersion()) {
+            // Show message in HTML comment
+            $this->return_data = "<!-- EE-PHP-GA really needs PHP version 5.3+. You are running " . $this->_getCurrentPhpVersion() . " -->";
+            return $this->return_data;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param $account_id
+     * @param $domainname
+     * @return UnitedPrototype\GoogleAnalytics\Tracker
+     */
+    private function _initTracker($account_id, $domainname)
+    {
+        return new GoogleAnalytics\Tracker($account_id, $domainname);
     }
 
     /**
