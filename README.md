@@ -5,15 +5,15 @@
 
 This addon enables you to implement Google Analytics in your ExpressionEngine site, the cookie-less way. Really nice if you're fighting with the recent EU rules about cookies.
 
-***Currently only supports the `trackPageView` method of Google Analytics.***
+***Currently only supports the `trackPageview` method of Google Analytics.***
 
 ## Changelog
-~ 04-okt-2012 ~ 
+~ 04-oct-2012 ~ 
 
 0.1 alpha release (proof of concept)
 
 ## Usage
-`{exp:phpga:trackPageView ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" pagetitle="{title}"}`
+`{exp:phpga:trackPageview ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" pagetitle="{title}"}`
 
 ## TODO
 

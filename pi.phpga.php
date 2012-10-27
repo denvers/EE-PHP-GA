@@ -1,5 +1,18 @@
 <?php if (!defined("BASEPATH")) exit('No direct script access allowed.');
 
+/**
+ * ExpressionEngine EE-PHP-GA plugin
+ *
+ * This file must be in your /system/third_party/phpga directory of your ExpressionEngine installation
+ * Usage: {exp:phpga:trackPageview ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" pagetitle="{title}"}
+ *
+ * @package     EE-PHP-GA
+ * @category    Plugin
+ * @author      Denver Sessink <dsessink@gmail.com>
+ * @link        https://github.com/denvers/EE-PHP-GA
+ * @copyright   Copyright (c) 2012 Denver Sessink
+ */
+
 //error_reporting(E_ALL);
 //ini_set('display_errors', true);
 
@@ -8,28 +21,24 @@ require_once(dirname(__FILE__) . "/autoload.php");
 
 use UnitedPrototype\GoogleAnalytics;
 
-$plugin_info       = array(
-    'pi_name'        => ADDON_NAME,
-    'pi_version'     => ADDON_VERSION,
-    'pi_author'      => 'Denver Sessink',
-    'pi_author_url'  => '',
+$plugin_info = array(
+    'pi_name' => ADDON_NAME,
+    'pi_version' => ADDON_VERSION,
+    'pi_author' => 'Denver Sessink',
+    'pi_author_url' => 'https://github.com/denvers/EE-PHP-GA',
     'pi_description' => ADDON_DESCRIPTION,
-    'pi_usage'       => '{exp:phpga:trackPageView ga_account_id="" domainname="denver.com"}',
+    'pi_usage' => '{exp:phpga:trackPageview ga_account_id="" domainname="domain.com"}',
 );
 
 /**
- * Extension File for php-ga
- *
- * This file must be in your /system/third_party/phpga directory of your ExpressionEngine installation
- * Usage: {exp:phpga:trackPageView ga_account_id="UA-XXXXXXX-X" domainname="your-domainname.com" pagetitle="{title}"}
- *
- * @package             com.denversessink.phpga
- * @author              Denver Sessink (dsessink@gmail.com)
- * @copyright           Copyright (c) 2012 Denver Sessink
+ * Class Phpga
  */
 class Phpga
 {
-    public $return_data = '';
+    /**
+     * @var string
+     */
+    private $return_data;
 
     /**
      * Constructor
@@ -42,16 +51,16 @@ class Phpga
     }
 
     /**
-     * trackPageView with Google Analytics
+     * trackPageview with Google Analytics
      *
      * @return string
      */
-    public function trackPageView()
+    public function trackPageview()
     {
-        if (!$this->compatiblePhpVersion())
-        {
+        // Check PHP version (needs 5.3+)
+        if (!$this->_compatiblePhpVersion()) {
             // Show message in HTML comment
-            $this->return_data = "<!-- php-ga really needs PHP version 5.3+. You are running ".$this->getCurrentPhpVersion()." -->";
+            $this->return_data = "<!-- EE-PHP-GA really needs PHP version 5.3+. You are running " . $this->_getCurrentPhpVersion() . " -->";
             return $this->return_data;
         }
 
@@ -80,14 +89,12 @@ class Phpga
 
             // Track page view
             $tracker->trackPageview($page, $session, $visitor);
-        }
-        catch( Exception $ex )
-        {
-            $this->return_data = "<!-- php-ga exception: ".$ex->getMessage()." -->";
+        } catch (Exception $ex) {
+            $this->return_data = "<!-- EE-PHP-GA exception: " . $ex->getMessage() . " -->";
             return $this->return_data;
         }
 
-        $this->return_data = "<!-- php-ga: Current page tracked. -->";
+        $this->return_data = "<!-- EE-PHP-GA: page tracking OK! -->";
         return $this->return_data;
     }
 
@@ -96,11 +103,10 @@ class Phpga
      *
      * @return bool
      */
-    private function compatiblePhpVersion()
+    private function _compatiblePhpVersion()
     {
-        $phpversion = $this->getCurrentPhpVersion();
-        if ( $phpversion < 5.3 )
-        {
+        $phpversion = $this->_getCurrentPhpVersion();
+        if ($phpversion < 5.3) {
             return false;
         }
 
@@ -112,7 +118,7 @@ class Phpga
      *
      * @return  double (eg. 5.3.12)
      */
-    private function getCurrentPhpVersion()
+    private function _getCurrentPhpVersion()
     {
         defined('PHP_VERSION') || define('PHP_VERSION', phpversion());
         return PHP_VERSION;
@@ -121,14 +127,14 @@ class Phpga
     /**
      * Plugin usage
      *
-     * @return	string
+     * @return    string
      */
     function usage()
     {
         ob_start();
         ?>
     *** EXAMPLE ***
-    {exp:phpga:trackPageView ga_account_id="" domainname="denver.com"}
+    {exp:phpga:trackPageview ga_account_id="" domainname="domain.com"}
 
     <?php
         $buffer = ob_get_contents();
@@ -139,4 +145,4 @@ class Phpga
     }
 }
 
-/* End of file ext.phpga.php */
+/* End of file pi.phpga.php */
